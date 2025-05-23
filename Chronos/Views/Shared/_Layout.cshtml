@@ -4,12 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Chronos</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Chronos.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/toastr.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/argon-dashboard.min.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+    @* <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Chronos</a>
@@ -29,9 +31,9 @@
                 </div>
             </div>
         </nav>
-    </header>
+    </header> *@
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="main-content pb-3">
             @RenderBody()
         </main>
     </div>
@@ -44,6 +46,40 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/toastr.min.js" asp-append-version="true"></script>
+    <script src="~/js/perfect-scrollbar.min.js" asp-append-version="true"></script>
+    <script src="~/js/argon-dashboard.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+
+    @if (null != TempData["AlertMessage"] && null != TempData["AlertType"])
+    {
+        var alertType = (OperationStatus)TempData["AlertType"]!;
+        var alertMessage = TempData["AlertMessage"];
+
+        <script type="text/javascript">
+            @if (alertType == OperationStatus.Succeeded)
+            {
+                <text>
+                    window.toastr.success("@alertMessage");
+                </text>
+            }
+            else if (alertType == OperationStatus.Warning)
+            {
+                <text>
+                    window.toastr.warning("@alertMessage");
+                </text>
+            }
+            else if (alertType == OperationStatus.Failed)
+            {
+                <text>
+                    window.toastr.error("@alertMessage");
+                </text>
+            }
+        </script>
+    }
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

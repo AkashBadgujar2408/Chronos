@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chronos", "Chronos\Chronos.csproj", "{7A993477-E038-484A-82A8-DF1A373DFBE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chronos", "Chronos\Chronos.csproj", "{7A993477-E038-484A-82A8-DF1A373DFBE2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chronos.Infrastructure", "Chronos.Infrastructure\Chronos.Infrastructure.csproj", "{34D566FC-E99D-446F-9D0F-8005D5CE1599}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chronos.Core", "Chronos.Core\Chronos.Core.csproj", "{6AEE73CE-2E1B-4BC7-B6F6-6D6542141E05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{7A993477-E038-484A-82A8-DF1A373DFBE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A993477-E038-484A-82A8-DF1A373DFBE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A993477-E038-484A-82A8-DF1A373DFBE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34D566FC-E99D-446F-9D0F-8005D5CE1599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34D566FC-E99D-446F-9D0F-8005D5CE1599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34D566FC-E99D-446F-9D0F-8005D5CE1599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34D566FC-E99D-446F-9D0F-8005D5CE1599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AEE73CE-2E1B-4BC7-B6F6-6D6542141E05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AEE73CE-2E1B-4BC7-B6F6-6D6542141E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AEE73CE-2E1B-4BC7-B6F6-6D6542141E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AEE73CE-2E1B-4BC7-B6F6-6D6542141E05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

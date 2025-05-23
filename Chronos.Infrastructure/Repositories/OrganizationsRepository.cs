@@ -1,0 +1,67 @@
+﻿
+using Chronos.Core.Entities;
+using Chronos.Core.RepositoryContracts;
+using Chronos.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
+
+namespace Chronos.Infrastructure.Repositories;
+
+public class OrganizationsRepository(ApplicationDbContext _dbContext) : IOrganizationsRepository
+{
+    public async Task<Organization?> AddOrganization(Organization organization)
+    {
+        if (organization == null) return null;
+        if (organization.Id != Guid.Empty) return null;
+
+        organization.Id = Guid.NewGuid();
+
+        await _dbContext.Organizations.AddAsync(organization);
+
+        int recordsAffected = await _dbContext.SaveChangesAsync();
+
+        if (recordsAffected > 0)
+        {
+            return organization;
+        }
+        return null;
+    }
+
+    public async Task<Organization?> UpdateOrganization(Organization organization)
+    {
+        if (organization == null) return null;
+        if (organization.Id == Guid.Empty) return null;
+
+        Organization? existingOrganization = await _dbContext.Organizations.FirstOrDefaultAsync(org => org.Id == organization.Id);
+
+        if (existingOrganization == null) return null;
+
+        existingOrganization.Name = organization.Name;
+        existingOrganization.Email = organization.Email;
+        existingOrganization.PhoneNumber = organization.PhoneNumber;
+        existingOrganization.Address = organization.Address;
+        existingOrganization.Website = organization.Website;
+        existingOrganization.UpdatedBy = organization.UpdatedBy;
+        existingOrganization.UpdatedOn = organization.UpdatedOn;
+
+        int rowsAffected = await _dbContext.SaveChangesAsync();
+
+        if (rowsAffected > 0)
+        {
+            return organization;
+        }
+        return null;
+    }
+
+    public async Task<bool> DeleteOrganization(Guid? organizationId)
+    {
+        if (organizationId == null || organizationId == Guid.Empty) throw new ArgumentNullException("Invalid OrganizationId. Delete operation failed");
+        Organization? existingOrganization = await _dbContext.Organizations.FirstOrDefaultAsync(org => org.Id == organizationId);
+
+        if (existingOrganization == null) throw new ArgumentNullException("Organization not found. Delete operation failed.");
+
+        _dbContext.Organizations.Remove(existingOrganization);
+        int recordsAffected = await _dbContext.SaveChangesAsync();
+
+        return (recordsAffected > 0);
+    }
+}

@@ -1,0 +1,23 @@
+﻿using Chronos.Core.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace Chronos.Infrastructure.Context;
+
+public class ApplicationDbContext : DbContext
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    {
+
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+    }
+
+    public DbSet<ApplicationUser> Users { get; set; }
+    public DbSet<Organization> Organizations { get; set; }
+    public DbSet<Team> Teams { get; set; }
+    public DbSet<Project> Projects { get; set; }
+    public DbSet<ProjectTask> Tasks { get; set; }
+}
