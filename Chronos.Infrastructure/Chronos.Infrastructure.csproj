@@ -19,4 +19,10 @@
     <ProjectReference Include="..\Chronos.Core\Chronos.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="ApplicationCore">
+      <HintPath>bin\Debug\net8.0\ApplicationCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

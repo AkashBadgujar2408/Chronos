@@ -1,13 +1,16 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Chronos.Core.DTOs;
-    public class RegisterRequest
-    {
+
+public class RegisterRequest
+{
     [Required(ErrorMessage = "{0} is required.")]
-    [StringLength(15, MinimumLength = 5, ErrorMessage ="{0} length must be between {2} and {1} characters.")]
+    [StringLength(15, MinimumLength = 5, ErrorMessage = "{0} length must be between {2} and {1} characters.")]
     [DisplayName("User Name")]
+    [Remote(action: "IsUserNameAvailable", controller: "Validations", ErrorMessage = "{0} is already taken, please try a different {0}.")]
     public string? UserName { get; set; }
 
     [Required(ErrorMessage = "{0} is required.")]
@@ -35,4 +38,7 @@ namespace Chronos.Core.DTOs;
     [EmailAddress(ErrorMessage = "{0} is not in proper format.")]
     [DisplayName("Email Address")]
     public string? Email { get; set; }
-    }
+
+    [Range(typeof(bool), "true", "true", ErrorMessage = "Please read and accept the terms & conditions to create your account.")]
+    public bool AreTermsNConditionsAccepted { get; set; }
+}

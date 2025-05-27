@@ -4,135 +4,84 @@
     ViewBag.Title = "Register User";
 }
 
-<div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('/images/project-management-bg.jpg'); background-position: top;">
-    <span class="mask bg-gradient-dark opacity-6"></span>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5 text-center mx-auto">
-                <h1 class="text-white mb-2 mt-5">Welcome to Chronos!</h1>
-                <p class="text-lead text-white">Your organizational project management system</p>
-            </div>
+<div class="d-flex justify-content-center">
+    <h1>Chronos</h1>
+</div>
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+            <h3 class="card-title text-center mb-4">Register</h3>
+            <form role="form" asp-controller="Accounts" asp-action="Register">
+                <div class="mb-3">
+                    <input asp-for="UserName" class="form-control" placeholder="Enter username" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <input asp-for="FullName" class="form-control" placeholder="Enter full name" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <input asp-for="Email" class="form-control" placeholder="Enter email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <input type="number" asp-for="PhoneNumber" class="form-control" placeholder="Enter phone number" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <input asp-for="Password" class="form-control" placeholder="Enter password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" asp-for="AreTermsNConditionsAccepted">
+                    <label class="form-check-label" asp-for="AreTermsNConditionsAccepted">
+                        I agree to the <a href="javascript:;" class="text-primary" data-bs-toggle="modal" data-bs-target="#termsnConditionsModal">Terms and Conditions</a>
+                    </label>
+                    <div>
+                        <span asp-validation-for="AreTermsNConditionsAccepted" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Sign up</button>
+                </div>
+                <p class="text-center text-muted mt-3 mb-0">Already have an account? <a href="#" class="text-primary fw-bold">Sign in</a></p>
+            </form>
         </div>
     </div>
 </div>
 
-<div class="container">
-    <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
-        <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
-            <div class="card z-index-0">
-                <div class="card-header text-center pt-4">
-                    <h5>Register</h5>
-                </div>
-                <div class="card-body">
-                    <form role="form" asp-controller="Accounts" asp-action="Register">
-                        <div class="mb-3">
-                            <input asp-for="UserName" placeholder="Username" class="form-control" />
-                            <span asp-validation-for="UserName"></span>
-                        </div>
-                        <div class="mb-3">
-                            <input asp-for="FullName" placeholder="Fullname" class="form-control" />
-                            <span asp-validation-for="FullName"></span>
-                        </div>
-                        <div class="mb-3">
-                            <input asp-for="Email" placeholder="Email" class="form-control" />
-                            <span asp-validation-for="Email"></span>
-                        </div>
-                        <div class="mb-3">
-                            <input type="number" asp-for="PhoneNumber" placeholder="Phone Number" class="form-control" />
-                            <span asp-validation-for="PhoneNumber" />
-                        </div>
-                        <div class="mb-3">
-                            <input asp-for="Password" placeholder="Password" class="form-control" />
-                            <span asp-validation-for="Password"></span>
-                        </div>
-                        <div class="mb-3">
-                            <input asp-for="ConfirmPassword" placeholder="Confirm Password" class="form-control" />
-                            <span asp-validation-for="ConfirmPassword"></span>
-                        </div>
-                        <div class="form-check form-check-info text-start">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                I agree the <a href="javascript:openTermsAndConditionsModal();" class="text-dark font-weight-bolder">Terms and Conditions</a>
-                            </label>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
-                        </div>
-                        <p class="text-sm mt-3 mb-0">Already have an account? <a href="javascript: ;" class="text-dark font-weight-bolder">Sign in</a></p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<footer class="footer py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mb-4 mx-auto text-center">
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                    Company
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                    About Us
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                    Team
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                    Products
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                    Blog
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                    Pricing
-                </a>
-            </div>
-            <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                    <span class="text-lg fab fa-dribbble"></span>
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                    <span class="text-lg fab fa-twitter"></span>
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                    <span class="text-lg fab fa-instagram"></span>
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                    <span class="text-lg fab fa-pinterest"></span>
-                </a>
-                <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                    <span class="text-lg fab fa-github"></span>
-                </a>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- Modal -->
-<div class="modal fade" id="termsnConditionsModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade" id="termsnConditionsModal" tabindex="-1" aria-labelledby="termsnConditionsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Terms & Conditions</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="termsnConditionsLabel">Terms and Conditions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                There are no terms & conditions
+                <p><strong>Welcome to Chronos</strong></p>
+                <p>By accessing or using our service, you agree to be bound by these terms. If you disagree with any part of the terms, then you may not access the service.</p>
+
+                <h6>1. Use of the Service</h6>
+                <p>You agree not to misuse the service or help anyone else to do so.</p>
+
+                <h6>2. Privacy Policy</h6>
+                <p>Your privacy is important to us. Please review our Privacy Policy for details on how we collect and use personal information.</p>
+
+                <h6>3. Changes to Terms</h6>
+                <p>We reserve the right to modify or replace these Terms at any time. It is your responsibility to check the Terms periodically for changes.</p>
+
+                <h6>4. Contact Us</h6>
+                <p>If you have any questions about these Terms, please contact us.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn bg-gradient-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-<script type="text/javascript">
-    function openTermsAndConditionsModal(){
-        $("#termsnConditionsModal").modal("show");
-    }
-</script>

@@ -19,13 +19,13 @@ public class UsersService : IUsersService
         _mapper = mapper;
     }
 
-    public async Task<OperationResult<AuthenticationResponse?>> ValidateLoginCredentialsAsync(LoginRequest? loginRequest)
+    public async Task<OperationResult<AuthenticationResponse?>> ValidateLoginCredentialsAsync(SignInRequest? loginRequest)
     {
         OperationType operation = OperationType.Read;
 
         if (loginRequest == null)
         {
-            return OperationResult.Failure<AuthenticationResponse?>(operation, message: "Invalid login request.");
+            return OperationResult.Failure<AuthenticationResponse?>(operation, message: "Invalid login request!");
         }
 
         if (!ValidationHelper.TryValidate(loginRequest, out var validationResults))
@@ -55,7 +55,7 @@ public class UsersService : IUsersService
         OperationType operation = OperationType.Create;
         if (registerRequest == null)
         {
-            return OperationResult.Failure<AuthenticationResponse?>(operation, message: "User registration failed.");
+            return OperationResult.Failure<AuthenticationResponse?>(operation, message: "Invalid registration request!");
         }
 
         if (!ValidationHelper.TryValidate(registerRequest, out var validationResults))
@@ -82,5 +82,25 @@ public class UsersService : IUsersService
     public Task<OperationResult<AuthenticationResponse?>> UpdateUserAsync(UserUpdateRequest? userUpdateRequest)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<OperationResult<AuthenticationResponse?>> GetUserByUserName(string? userName)
+    {
+        OperationType operation = OperationType.Read;
+        if (string.IsNullOrWhiteSpace(userName))
+        {
+            return OperationResult.Failure<AuthenticationResponse?>(operation, message: "Invalid user name!");
+        }
+
+        ApplicationUser? applicationUser = await _usersRepository.GetUserByUserNameAsync(userName);
+
+        if (applicationUser == null)
+        {
+            return OperationResult.Failure<AuthenticationResponse?>(operation, message: "User with the given user name not found.");
+        }
+
+        AuthenticationResponse? authResponse = _mapper.Map<AuthenticationResponse>(applicationUser);
+
+        return OperationResult.Success(authResponse, operation, message: "User with the given user name found.")!;
     }
 }

@@ -1,12 +1,13 @@
-﻿using Chronos.Core.Entities;
+﻿using ApplicationCore.Infrastructure;
+using Chronos.Core.Entities;
 using Chronos.Core.RepositoryContracts;
 using Chronos.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chronos.Infrastructure.Repositories;
 
-    public class UsersRepository(ApplicationDbContext _dbContext) : IUsersRepository
-    {
+public class UsersRepository(ApplicationDbContext _dbContext) : IUsersRepository
+{
     public async Task<ApplicationUser?> AddUserAsync(ApplicationUser user)
     {
         if (user == null) return null;
@@ -46,13 +47,17 @@ namespace Chronos.Infrastructure.Repositories;
     public async Task<ApplicationUser?> ValidateLoginCredentialsAsync(string? userName, string? password)
     {
         ApplicationUser? existingUser = await _dbContext.Users.FirstOrDefaultAsync(user => userName == userName);
+        if (existingUser == null) return null;
+
+        string encryptedPassword = CryptoService.EncryptWithAlgoInfo(password!, existingUser.AlgoInfo!);
+        if (encryptedPassword == null || encryptedPassword != existingUser.PasswordHash) return null;
 
         return existingUser;
     }
 
     public async Task<ApplicationUser?> GetUserByUserNameAsync(string? userName)
     {
-        ApplicationUser? existingUser = await _dbContext.Users.FirstOrDefaultAsync(user => user.UserName ==  userName);
+        ApplicationUser? existingUser = await _dbContext.Users.FirstOrDefaultAsync(user => user.UserName == userName);
 
         return existingUser;
     }
