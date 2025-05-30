@@ -1,3 +1,12 @@
 ﻿@{
-    Layout = "_Layout";
+    var path = Context.Request.Path.Value?.ToLowerInvariant();
+
+    if (path != null && (path.Contains("/accounts/signin") || path.Contains("/accounts/register")))
+    {
+        Layout = "_Layout";
+    }
+    else
+    {
+        Layout = "_LayoutLoggedIn";
+    }
 }

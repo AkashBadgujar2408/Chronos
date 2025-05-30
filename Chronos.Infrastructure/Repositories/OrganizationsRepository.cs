@@ -8,7 +8,7 @@ namespace Chronos.Infrastructure.Repositories;
 
 public class OrganizationsRepository(ApplicationDbContext _dbContext) : IOrganizationsRepository
 {
-    public async Task<Organization?> AddOrganization(Organization organization)
+    public async Task<Organization?> AddOrganizationAsync(Organization organization)
     {
         if (organization == null) return null;
         if (organization.Id != Guid.Empty) return null;
@@ -26,7 +26,7 @@ public class OrganizationsRepository(ApplicationDbContext _dbContext) : IOrganiz
         return null;
     }
 
-    public async Task<Organization?> UpdateOrganization(Organization organization)
+    public async Task<Organization?> UpdateOrganizationAsync(Organization organization)
     {
         if (organization == null) return null;
         if (organization.Id == Guid.Empty) return null;
@@ -52,7 +52,7 @@ public class OrganizationsRepository(ApplicationDbContext _dbContext) : IOrganiz
         return null;
     }
 
-    public async Task<bool> DeleteOrganization(Guid? organizationId)
+    public async Task<bool> DeleteOrganizationAsync(Guid? organizationId)
     {
         if (organizationId == null || organizationId == Guid.Empty) throw new ArgumentNullException("Invalid OrganizationId. Delete operation failed");
         Organization? existingOrganization = await _dbContext.Organizations.FirstOrDefaultAsync(org => org.Id == organizationId);
@@ -63,5 +63,27 @@ public class OrganizationsRepository(ApplicationDbContext _dbContext) : IOrganiz
         int recordsAffected = await _dbContext.SaveChangesAsync();
 
         return (recordsAffected > 0);
+    }
+
+    public async Task<OrgAdminMap?> CreateOrgAdminMapAsync(OrgAdminMap orgAdminMap)
+    {
+        if (orgAdminMap == null) throw new ArgumentNullException("Invalid request.");
+        Organization? existingOrganization = await _dbContext.Organizations.FirstOrDefaultAsync(org => org.Id == orgAdminMap.OrganizationId);
+
+        if (existingOrganization == null) throw new ArgumentNullException("Organization not found. Set operation failed.");
+
+        ApplicationUser? existingUser = await _dbContext.Users.FirstOrDefaultAsync(user => user.Id == orgAdminMap.AdminId);
+
+        if (existingUser == null) throw new ArgumentNullException("Application User not found. Set operation failed.");
+
+        _dbContext.OrgAdminMaps.Add(orgAdminMap);
+        int recordsAffected = await _dbContext.SaveChangesAsync();
+
+        if (recordsAffected > 0)
+        {
+            return orgAdminMap;
+        }
+
+        return null;
     }
 }

@@ -11,6 +11,7 @@ public static class DependencyInjection
     {
         services.AddAutoMapper(typeof(ApplicationUserToAuthenticationResponseMappingProfile).Assembly);
         services.AddScoped<IUsersService, UsersService>();
+        services.AddScoped<IOrganizationsService, OrganizationsService>();
         services.AddScoped<JwtService>();
 
         return services;

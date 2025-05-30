@@ -46,10 +46,15 @@ namespace Chronos.Controllers
                     });
 
                     TempData.SetNotificationAlert(signInResult.Status, "User signed in successfully");
+                    if (!signInResult.Entity.IsInTeam)
+                    {
+                        return RedirectToAction("Create", "Organization");
+                    }
                 }
                 else
                 {
                     TempData.SetNotificationAlert(OperationStatus.Failed, "User sign in failed");
+                    return View(model);
                 }
             }
             else
@@ -81,6 +86,7 @@ namespace Chronos.Controllers
                 else
                 {
                     TempData.SetNotificationAlert(OperationStatus.Failed, "User registration failed");
+                    return View(model);
                 }
             }
             else

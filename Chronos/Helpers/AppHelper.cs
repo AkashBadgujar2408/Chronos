@@ -9,4 +9,10 @@ public static class AppHelper
         tempData["AlertType"] = operationStatus;
         tempData["AlertMessage"] = message;
     }
+
+    public static void SetNotificationAlert<T>(this ITempDataDictionary tempData, OperationResult<T> operationResult)
+    {
+        tempData["AlertType"] = operationResult.Status;
+        tempData["AlertMessage"] = operationResult.Message;
+    }
 }

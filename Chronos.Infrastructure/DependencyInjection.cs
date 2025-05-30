@@ -16,6 +16,7 @@ public static class DependencyInjection
             options.UseSqlServer(configuration.GetConnectionString("ChronosDBConnection"))
         );
         services.AddScoped<IUsersRepository, UsersRepository>();
+        services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
 
         return services;
     }

@@ -13,10 +13,15 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<OrgAdminMap>()
+            .HasKey(x => new { x.OrganizationId, x.AdminId });
     }
+
 
     public DbSet<ApplicationUser> Users { get; set; }
     public DbSet<Organization> Organizations { get; set; }
+    public DbSet<OrgAdminMap> OrgAdminMaps { get; set; }
     public DbSet<Team> Teams { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<ProjectTask> Tasks { get; set; }

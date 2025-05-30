@@ -12,5 +12,5 @@ public class ApplicationUser : EntityBase
     public string? AlgoInfo { get; set; }
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
-    public string? TeamId { get; set; }
+    public Guid? TeamId { get; set; }
 }

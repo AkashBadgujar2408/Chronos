@@ -15,6 +15,7 @@ public class ApplicationUserToAuthenticationResponseMappingProfile : Profile
             .ForMember(authResp => authResp.FullName, opt => opt.MapFrom(user => user.FullName))
             .ForMember(authResp => authResp.PhoneNumber, opt => opt.MapFrom(opt => opt.PhoneNumber))
             .ForMember(authResp => authResp.Email, opt => opt.MapFrom(opt => opt.Email))
+            .ForMember(authResp => authResp.TeamId, opt => opt.MapFrom(opt => opt.TeamId))
             .ForMember(authResp => authResp.IsActive, opt => opt.MapFrom(opt => opt.IsActive));
     }
 }
