@@ -47,7 +47,7 @@ public class OrganizationsRepository(ApplicationDbContext _dbContext) : IOrganiz
 
         if (rowsAffected > 0)
         {
-            return organization;
+            return existingOrganization;
         }
         return null;
     }
@@ -85,5 +85,20 @@ public class OrganizationsRepository(ApplicationDbContext _dbContext) : IOrganiz
         }
 
         return null;
+    }
+
+    public async Task<Organization?> GetUserOrganizationAsync(Guid userId)
+    {
+        Organization? organization = await (
+            from user in _dbContext.Users
+            join team in _dbContext.Teams
+            on user.TeamId equals team.Id
+            join org in _dbContext.Organizations
+            on team.OrganizationId equals org.Id
+            where user.Id == userId
+            select org)
+            .FirstOrDefaultAsync();
+
+        return organization;
     }
 }

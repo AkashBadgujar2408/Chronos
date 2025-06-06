@@ -1,6 +1,8 @@
 ﻿
 using ApplicationCore.DTOs;
+using Chronos.Core.Enums;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.Web;
 
 public static class AppHelper
 {
@@ -14,5 +16,10 @@ public static class AppHelper
     {
         tempData["AlertType"] = operationResult.Status;
         tempData["AlertMessage"] = operationResult.Message;
+    }
+
+    public static string GetActiveClass(CurrentView currentView, CurrentView currentViewToCheck)
+    {
+        return (currentView == currentViewToCheck)? "active" : string.Empty;
     }
 }

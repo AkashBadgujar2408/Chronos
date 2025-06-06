@@ -9,5 +9,6 @@ public interface IUsersRepository
     Task<ApplicationUser?> UpdateUserAsync(ApplicationUser user);
     Task<ApplicationUser?> ValidateLoginCredentialsAsync(string? userName, string? password);
     Task<ApplicationUser?> GetUserByUserNameAsync(string? userName);
+    Task<bool> SetUserTeamAsync(Guid? userId, Guid? teamId); 
     Task<bool> DeleteUserAsync(Guid? userId);
 }

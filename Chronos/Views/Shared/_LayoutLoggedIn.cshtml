@@ -23,30 +23,38 @@
                     </span>
                 </a>
                 <hr>
+                @{
+                    CurrentView currentView = CurrentView.Other;
+                    if (ViewBag.CurrentView is CurrentView)
+                    {
+                        currentView = (CurrentView)ViewBag.CurrentView;
+                    }
+                }
+
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">
-                            Home
+                        <a href="~/Dashboard" class="nav-link @AppHelper.GetActiveClass(currentView, CurrentView.Dashboard)">
+                            Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            Home
+                        <a href="~/Organization/Update" class="nav-link @AppHelper.GetActiveClass(currentView, CurrentView.Organization)">
+                            Organization
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            Home
+                        <a href="~/Teams" class="nav-link @AppHelper.GetActiveClass(currentView, CurrentView.Teams)">
+                            Teams
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            Home
+                        <a href="~/Projects" class="nav-link @AppHelper.GetActiveClass(currentView, CurrentView.Projects)">
+                            Project
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            Home
+                        <a href="~/Tasks" class="nav-link @AppHelper.GetActiveClass(currentView, CurrentView.Tasks)">
+                            Tasks
                         </a>
                     </li>
                 </ul>

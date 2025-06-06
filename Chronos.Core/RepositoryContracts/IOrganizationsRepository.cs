@@ -9,4 +9,6 @@ namespace Chronos.Core.RepositoryContracts;
     Task<Organization?> UpdateOrganizationAsync(Organization organization);
     Task<bool> DeleteOrganizationAsync(Guid? organizationId);
     Task<OrgAdminMap?> CreateOrgAdminMapAsync(OrgAdminMap orgAdminMap);
+
+    Task<Organization?> GetUserOrganizationAsync(Guid userId);
     }

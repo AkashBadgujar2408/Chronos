@@ -1,0 +1,73 @@
+﻿@model OrganizationUpdateRequest
+
+@{
+    ViewBag.Title = "Update Organization";
+    ViewBag.CurrentView = CurrentView.Organization;
+}
+
+<div class="card shadow-sm border-0">
+    <div class="card-header">
+        <h5 class="card-title text-center fw-bold mb-0">Update your Organization</h5>
+    </div>
+    <div class="card-body">
+
+        <form role="form" asp-controller="Organization" asp-action="Update">
+            <input asp-for="Id" type="hidden" />
+
+            <div class="row mb-3 align-items-center">
+                <div class="col-md-6">
+                    <label asp-for="Name" class="fw-bold"></label>
+                </div>
+                <div class="col-md-6">
+                    <input asp-for="Name" class="form-control" placeholder="Organization name" />
+                    <span asp-validation-for="Name"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <div class="col-md-6">
+                    <label asp-for="Address" class="fw-bold"></label>
+                </div>
+                <div class="col-md-6">
+                    <input asp-for="Address" class="form-control" placeholder="Organization address" />
+                    <span asp-validation-for="Address"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <div class="col-md-6">
+                    <label asp-for="Website" class="fw-bold"></label>
+                </div>
+                <div class="col-md-6">
+                    <input asp-for="Website" class="form-control" placeholder="Organization website" />
+                    <span asp-validation-for="Website"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <div class="col-md-6">
+                    <label asp-for="Email" class="fw-bold"></label>
+                </div>
+                <div class="col-md-6">
+                    <input asp-for="Email" class="form-control" placeholder="Organization email" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <div class="col-md-6">
+                    <label asp-for="PhoneNumber" class="fw-bold"></label>
+                </div>
+                <div class="col-md-6">
+                    <input asp-for="PhoneNumber" class="form-control" placeholder="Organization phone number" />
+                    <span asp-validation-for="PhoneNumber"></span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center mb-3">
+                <button type="submit" class="btn btn-primary">Update Organization</button>
+            </div>
+
+        </form>
+    </div>
+</div>

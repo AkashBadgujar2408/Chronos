@@ -7,5 +7,7 @@ namespace Chronos.Core.ServiceContracts;
 public interface IOrganizationsService
 {
     Task<OperationResult<OrganizationResponse?>> CreateOrganizationAsync(OrganizationCreateRequest? organizationCreateRequest);
-    Task<OperationResult<OrganizationResponse?>> UpdateOrganizationAsync();
+    Task<OperationResult<OrganizationResponse?>> UpdateOrganizationAsync(OrganizationUpdateRequest? organizationUpdateRequest);
+
+    Task<OrganizationResponse?> GetUserOrganizationAsync(Guid? userId);
 }

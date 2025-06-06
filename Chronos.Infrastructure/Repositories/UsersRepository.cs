@@ -62,6 +62,21 @@ public class UsersRepository(ApplicationDbContext _dbContext) : IUsersRepository
         return existingUser;
     }
 
+    public async Task<bool> SetUserTeamAsync(Guid? userId, Guid? teamId)
+    {
+        if (userId == null || userId == Guid.Empty) throw new ArgumentNullException("Invalid UserId. Update operation failed");
+        if (teamId == null || teamId == Guid.Empty) throw new ArgumentNullException("Invalid TeamId. Update operation failed.");
+
+        ApplicationUser? appUser = await _dbContext.Users.FirstOrDefaultAsync(user => user.Id == userId);
+        if (appUser == null) throw new ArgumentNullException("User not found. Update operation failed.");
+
+        appUser.TeamId = teamId;
+        appUser.UpdatedOn = DateTime.Now;
+        int recordsUpdated = await _dbContext.SaveChangesAsync();
+
+        return recordsUpdated > 0;
+    }
+
     public async Task<bool> DeleteUserAsync(Guid? userId)
     {
         if (userId == null || userId == Guid.Empty) throw new ArgumentNullException("Invalid UserId. Delete operation failed");
